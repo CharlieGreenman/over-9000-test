@@ -1,0 +1,95 @@
+{
+  "name": "over-9000-test",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/over-9000-test/src",
+  "prefix": "over-9000-test",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/over-9000-test",
+        "index": "apps/over-9000-test/src/index.html",
+        "main": "apps/over-9000-test/src/main.ts",
+        "polyfills": "apps/over-9000-test/src/polyfills.ts",
+        "tsConfig": "apps/over-9000-test/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/over-9000-test/src/favicon.ico",
+          "apps/over-9000-test/src/assets"
+        ],
+        "styles": ["apps/over-9000-test/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/over-9000-test/src/environments/environment.ts",
+              "with": "apps/over-9000-test/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "over-9000-test:build:production"
+        },
+        "development": {
+          "browserTarget": "over-9000-test:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "over-9000-test:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/over-9000-test/src/**/*.ts",
+          "apps/over-9000-test/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/over-9000-test"],
+      "options": {
+        "jestConfig": "apps/over-9000-test/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

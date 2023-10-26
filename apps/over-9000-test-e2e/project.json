@@ -1,0 +1,29 @@
+{
+  "name": "over-9000-test-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/over-9000-test-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/over-9000-test-e2e/cypress.json",
+        "devServerTarget": "over-9000-test:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "over-9000-test:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/over-9000-test-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["over-9000-test"]
+}
